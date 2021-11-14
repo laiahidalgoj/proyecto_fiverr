@@ -16,14 +16,14 @@ public class Vendedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor", fetch = FetchType.EAGER)
-    @JoinTable(name="ServicioVendedor",
-        joinColumns = {
-        @JoinColumn(name="IdVendedor", referencedColumnName = "id")
-    },
-            inverseJoinColumns = {
-            @JoinColumn(name="IdServicio", referencedColumnName = "id")
-            })
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor", fetch = FetchType.EAGER)
+//    @JoinTable(name="ServicioVendedor",
+//        joinColumns = {
+//        @JoinColumn(name="IdVendedor", referencedColumnName = "id")
+//    }
+//            inverseJoinColumns = {
+//            @JoinColumn(name="IdPA", referencedColumnName = "id")
+//            })
 
     // Atributos
     private String titulo;
