@@ -1,10 +1,8 @@
 package com.example.proyecto_fiverrEquipo2.controllers;
 
 import com.example.proyecto_fiverrEquipo2.entities.Vendedor;
-import com.example.proyecto_fiverrEquipo2.repository.PaquetesRepository;
-import com.example.proyecto_fiverrEquipo2.repository.ServicioRepository;
+import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,11 +12,11 @@ import java.util.List;
 public class VendedorController {
 
     private VendedorRepository vendedorRepository;
-    private ServicioRepository servicioRepository;
+    private TrabajoRepository trabajoRepository;
 
-    public VendedorController(VendedorRepository vendedorRepository, ServicioRepository servicioRepository) {
+    public VendedorController(VendedorRepository vendedorRepository, TrabajoRepository trabajoRepository) {
         this.vendedorRepository = vendedorRepository;
-        this.servicioRepository = servicioRepository;
+        this.trabajoRepository = trabajoRepository;
     }
 
     /**

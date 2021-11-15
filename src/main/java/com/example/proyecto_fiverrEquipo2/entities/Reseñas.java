@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Paquetes")
-public class Paquetes {
+public class Reseñas {
 
     @Id
     private Long id;
@@ -18,7 +18,7 @@ public class Paquetes {
     private Integer tiempoEntrega;
     private Double precio;
 
-    public Paquetes(Long id, Long idVendedor, String tipoPaquete, Integer numeroPaginas, Boolean actualizaciones, Integer numeroRevisiones, Boolean archivosFuente, Integer tiempoEntrega, Double precio) {
+    public Reseñas(Long id, Long idVendedor, String tipoPaquete, Integer numeroPaginas, Boolean actualizaciones, Integer numeroRevisiones, Boolean archivosFuente, Integer tiempoEntrega, Double precio) {
         this.id = id;
         this.idVendedor = idVendedor;
         this.tipoPaquete = tipoPaquete;

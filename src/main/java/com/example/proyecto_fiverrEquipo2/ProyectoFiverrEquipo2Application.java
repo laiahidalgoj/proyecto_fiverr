@@ -1,12 +1,12 @@
 package com.example.proyecto_fiverrEquipo2;
 
 //import com.example.proyecto_fiverrEquipo2.entities.Paquetes;
-import com.example.proyecto_fiverrEquipo2.entities.Servicio;
+import com.example.proyecto_fiverrEquipo2.entities.Trabajos;
 import com.example.proyecto_fiverrEquipo2.entities.TipoWeb;
 import com.example.proyecto_fiverrEquipo2.entities.Vendedor;
 //import com.example.proyecto_fiverrEquipo2.repository.PaquetesRepository;
 import com.example.proyecto_fiverrEquipo2.repository.PaquetesRepository;
-import com.example.proyecto_fiverrEquipo2.repository.ServicioRepository;
+import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import com.example.proyecto_fiverrEquipo2.repository.TipoWebRepository;
 import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
 import org.springframework.boot.SpringApplication;
@@ -25,19 +25,19 @@ public class ProyectoFiverrEquipo2Application {
 
 		VendedorRepository vendedorRepository = context.getBean(VendedorRepository.class);
 		PaquetesRepository paquetesRepository = context.getBean(PaquetesRepository.class);
-		ServicioRepository servicioRepository = context.getBean(ServicioRepository.class);
+		TrabajoRepository trabajoRepository = context.getBean(TrabajoRepository.class);
 		TipoWebRepository tipoWebRepository = context.getBean(TipoWebRepository.class);
 
 		// CREAMOS SERVICIOS
-		Servicio tipoWeb = new Servicio("Tipo web");
-		Servicio plataformasHerramientas = new Servicio("Plataforma y herramientas");
-		Servicio serviciosIncluidos = new Servicio("Servicios incluidos");
+		Trabajos tipoWeb = new Trabajos("Tipo web");
+		Trabajos plataformasHerramientas = new Trabajos("Plataforma y herramientas");
+		Trabajos serviciosIncluidos = new Trabajos("Servicios incluidos");
 
-		System.out.println("Número de servicios en base de datos " +  servicioRepository.findAll().size());
+		System.out.println("Número de servicios en base de datos " +  trabajoRepository.findAll().size());
 		System.out.println("Número de vendedores en base de datos: " + vendedorRepository.findAll().size());
 
 		// GUARDAMOS SERVICIOS EN EL REPOSITORIO
-		servicioRepository.saveAll(Arrays.asList(tipoWeb, plataformasHerramientas, serviciosIncluidos));
+		trabajoRepository.saveAll(Arrays.asList(tipoWeb, plataformasHerramientas, serviciosIncluidos));
 
 		// CREAMOS TIPOS WEB
 		TipoWeb ecommerce = new TipoWeb("Ecommerce");
@@ -59,30 +59,41 @@ public class ProyectoFiverrEquipo2Application {
 
 		vendedorRepository.saveAll(Arrays.asList(vendedor1, vendedor2, vendedor3, vendedor4));
 
-		List<Servicio> serv1 = Arrays.asList(tipoWeb, plataformasHerramientas, serviciosIncluidos);
+		List<Trabajos> serv1 = Arrays.asList(tipoWeb, plataformasHerramientas, serviciosIncluidos);
+		List<Trabajos> serv2 = Arrays.asList(tipoWeb, plataformasHerramientas, serviciosIncluidos);
+		List<Trabajos> serv3 = Arrays.asList(tipoWeb, plataformasHerramientas, serviciosIncluidos);
+		List<Trabajos> serv4 = Arrays.asList(tipoWeb, plataformasHerramientas, serviciosIncluidos);
 
 		//creamos lista de tipoweb
 		List<TipoWeb> tipoWeb1 = Arrays.asList(ecommerce, blog, businessPromotion, productServiceMkt);
 
-		for (Servicio servicio : serv1) {
-			vendedor1.addServicio(servicio);
+		for (Trabajos trabajos : serv1) {
+			vendedor1.addServicio(trabajos);
 			}
-
+		for (Trabajos trabajos : serv2) {
+			vendedor2.addServicio(trabajos);
+		}
+		for (Trabajos trabajos : serv3) {
+			vendedor3.addServicio(trabajos);
+		}
+		for (Trabajos trabajos : serv4) {
+			vendedor4.addServicio(trabajos);
+		}
 
 		vendedorRepository.saveAll(Arrays.asList(vendedor1, vendedor2, vendedor3, vendedor4));
 
 
 
 		System.out.println("Número de vendedores " + vendedorRepository.findAll().size());
-		System.out.println("Número de vendedores " + servicioRepository.findAll().size());
+		System.out.println("Número de servicios " + trabajoRepository.findAll().size());
 
 		List<Vendedor> vendedores = vendedorRepository.findAll();
 
 		for(Vendedor vendedor : vendedores){
-			List<Servicio> servicios = vendedor.getServicios();
+			List<Trabajos> trabajos = vendedor.getServicios();
 			StringBuilder idServicios = new StringBuilder();
-				for(Servicio servicio : servicios){
-					idServicios.append(servicio.getId()).append(" ");
+				for(Trabajos trabajos : trabajos){
+					idServicios.append(trabajos.getId()).append(" ");
 				}
 			System.out.println("Id Vendedor: " + vendedor.getId() + " Id Servicio: " + idServicios);
 		}

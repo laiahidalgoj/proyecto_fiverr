@@ -3,7 +3,6 @@ package com.example.proyecto_fiverrEquipo2.entities;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Entidad que gestiona la tabla de vendedores de la base de datos
@@ -25,7 +24,7 @@ public class Vendedor {
             inverseJoinColumns = {
                     @JoinColumn(name = "IdServicio", referencedColumnName = "id")
             })
-    private List<Servicio> servicios = new ArrayList<>();
+    private List<Trabajos> trabajos = new ArrayList<>();
 
 
     // Atributos
@@ -62,12 +61,12 @@ public class Vendedor {
         this.id = id;
     }
 
-    public List<Servicio> getServicios() {
-        return servicios;
+    public List<Trabajos> getServicios() {
+        return trabajos;
     }
 
-    public void setServicios(List<Servicio> servicios) {
-        this.servicios = servicios;
+    public void setServicios(List<Trabajos> trabajos) {
+        this.trabajos = trabajos;
     }
 
     public String getTitulo() {
@@ -134,15 +133,15 @@ public class Vendedor {
         this.residencia = residencia;
     }
 
-    public void addServicio(Servicio servicio){
-        servicios.add(servicio);
-        servicio.getVendedores().add(this);
+    public void addServicio(Trabajos trabajos){
+        this.trabajos.add(trabajos);
+        trabajos.getVendedores().add(this);
     }
     @Override
     public String toString() {
         return "Vendedor{" +
                 "id=" + id +
-                ", servicios=" + servicios +
+                ", servicios=" + trabajos +
                 ", titulo='" + titulo + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", antiguedad=" + antiguedad +

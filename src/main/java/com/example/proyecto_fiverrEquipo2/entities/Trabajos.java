@@ -7,27 +7,27 @@ import java.util.*;
 
 @Entity
 @Table(name="servicios")
-public class Servicio {
+public class Trabajos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "servicios", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "trabajos", fetch = FetchType.EAGER)
     @JsonBackReference
     private List<Vendedor> vendedores = new ArrayList<>();
 
     private String nombre;
 
-    public Servicio(){
+    public Trabajos(){
         super();
     }
 
-   public Servicio(String nombre){
+   public Trabajos(String nombre){
         this.nombre = nombre;
    }
 
-    public Servicio(Long id, String nombre) {
+    public Trabajos(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
@@ -61,8 +61,8 @@ public class Servicio {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Servicio servicio = (Servicio) obj;
-        return Objects.equals(nombre, servicio.nombre);
+        Trabajos trabajos = (Trabajos) obj;
+        return Objects.equals(nombre, trabajos.nombre);
 
     }
 
