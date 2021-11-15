@@ -1,12 +1,13 @@
 package com.example.proyecto_fiverrEquipo2.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entidad que gestiona la tabla de vendedores de la base de datos
  */
-
 
 @Entity
 @Table(name = "Vendedores")
@@ -16,14 +17,16 @@ public class Vendedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor", fetch = FetchType.EAGER)
-//    @JoinTable(name="ServicioVendedor",
-//        joinColumns = {
-//        @JoinColumn(name="IdVendedor", referencedColumnName = "id")
-//    }
-//            inverseJoinColumns = {
-//            @JoinColumn(name="IdPA", referencedColumnName = "id")
-//            })
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "ServicioVendedor",
+            joinColumns = {
+                    @JoinColumn(name = "IdVendedor", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "IdServicio", referencedColumnName = "id")
+            })
+    private List<Servicio> servicios = new ArrayList<>();
+
 
     // Atributos
     private String titulo;
@@ -34,15 +37,12 @@ public class Vendedor {
     private String nivel;
     private String idioma;
     private String residencia;
-    private String tipoWeb;
-    private String servicios;
-    private String herramientas;
 
     // constructores
+    public Vendedor() {
+    }
 
-    public Vendedor(){};
-
-    public Vendedor(Long id, String titulo, String nombre, Integer antiguedad, String descripcion, String email, String nivel, String idioma, String residencia, String tipoWeb, String servicios, String herramientas) {
+    public Vendedor(Long id, String titulo, String nombre, Integer antiguedad, String descripcion, String email, String nivel, String idioma, String residencia) {
         this.id = id;
         this.titulo = titulo;
         this.nombre = nombre;
@@ -52,9 +52,6 @@ public class Vendedor {
         this.nivel = nivel;
         this.idioma = idioma;
         this.residencia = residencia;
-        this.tipoWeb = tipoWeb;
-        this.servicios = servicios;
-        this.herramientas = herramientas;
     }
 
     public Long getId() {
@@ -63,6 +60,14 @@ public class Vendedor {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
     }
 
     public String getTitulo() {
@@ -129,27 +134,36 @@ public class Vendedor {
         this.residencia = residencia;
     }
 
-    public String getTipoWeb() {
-        return tipoWeb;
+    public void addServicio(Servicio servicio){
+        servicios.add(servicio);
+        servicio.getVendedores().add(this);
+    }
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "id=" + id +
+                ", servicios=" + servicios +
+                ", titulo='" + titulo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", antiguedad=" + antiguedad +
+                ", descripcion='" + descripcion + '\'' +
+                ", email='" + email + '\'' +
+                ", nivel='" + nivel + '\'' +
+                ", idioma='" + idioma + '\'' +
+                ", residencia='" + residencia + '\'' +
+                '}';
     }
 
-    public void setTipoWeb(String tipoWeb) {
-        this.tipoWeb = tipoWeb;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Vendedor)) return true;
+        return id != null && id.equals(((Vendedor) obj).getId());
+
     }
 
-    public String getServicios() {
-        return servicios;
-    }
-
-    public void setServicios(String servicios) {
-        this.servicios = servicios;
-    }
-
-    public String getHerramientas() {
-        return herramientas;
-    }
-
-    public void setHerramientas(String herramientas) {
-        this.herramientas = herramientas;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
