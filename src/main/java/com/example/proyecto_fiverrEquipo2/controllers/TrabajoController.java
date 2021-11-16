@@ -48,7 +48,7 @@ public class TrabajoController {
 
     @CrossOrigin
     @GetMapping("/api/trabajo")
-    public List<TrabajoDto> findAllT() {
+    public List<TrabajoDto> findAllJobs() {
 
         List<Trabajo> trabajos = trabajoRepository.findAll();
         List<Review> reviews = reviewRepository.findAll();
