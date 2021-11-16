@@ -31,7 +31,7 @@ public class ReviewController {
     }
 
     /**
-     * Buscar todas las reseñas en BBDD
+     * Buscar todas las reseñas en BBDD.
      */
     @CrossOrigin
     @GetMapping("/api/reseñas")
