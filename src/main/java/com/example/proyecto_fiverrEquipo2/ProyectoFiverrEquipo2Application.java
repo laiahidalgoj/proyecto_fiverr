@@ -121,7 +121,7 @@ public class ProyectoFiverrEquipo2Application {
 		// GUARDAMOS TRABAJOS A REPOSITORIO
 		trabajoRepository.saveAll(Arrays.asList(trabajo1, trabajo2, trabajo3, trabajo4, trabajo5));
 
-		//CREMOS REVIEWS
+		//CREAMOS REVIEWS
 		Review review1 = new Review(null,5,"Excelente trabajo", trabajo1, vendedor1);
 		Review review2 = new Review(null,5,"un gusto exquisito en sus trabajos", trabajo2, vendedor2);
 		Review review3 = new Review(null,4,"Me encantaron sus diseños, aunque la entrega algo tarde", trabajo3, vendedor3);
