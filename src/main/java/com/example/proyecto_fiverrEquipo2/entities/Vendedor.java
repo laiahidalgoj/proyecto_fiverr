@@ -1,8 +1,15 @@
 package com.example.proyecto_fiverrEquipo2.entities;
 
+import com.example.proyecto_fiverrEquipo2.Empresa;
+import com.example.proyecto_fiverrEquipo2.Nivel;
+import com.example.proyecto_fiverrEquipo2.Pais;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Entidad que gestiona la tabla de vendedores de la base de datos
@@ -16,41 +23,46 @@ public class Vendedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "ServicioVendedor",
-            joinColumns = {
-                    @JoinColumn(name = "IdVendedor", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "IdServicio", referencedColumnName = "id")
-            })
-    private List<Trabajos> trabajos = new ArrayList<>();
+    @Enumerated
+    private Empresa empresa;
+
+    @Enumerated
+    private Pais paises;
+
+    @Enumerated
+    private Nivel nivel;
 
 
-    // Atributos
-    private String titulo;
     private String nombre;
-    private Integer antiguedad;
     private String descripcion;
+    private String imagen;
     private String email;
-    private String nivel;
-    private String idioma;
-    private String residencia;
 
-    // constructores
-    public Vendedor() {
+    @ManyToMany(mappedBy = "vendedores", fetch = FetchType.EAGER)
+    @JsonBackReference
+    private Set<Trabajo> trabajo = new HashSet<>();
+
+    public Vendedor(){}
+
+    public Vendedor(Long id, String nombre, String descripcion, Empresa empresa, Pais paises, String imagen, String email, Set<Trabajo> trabajo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.empresa = empresa;
+        this.paises = paises;
+        this.imagen = imagen;
+        this.email = email;
+        this.trabajo = trabajo;
     }
 
-    public Vendedor(Long id, String titulo, String nombre, Integer antiguedad, String descripcion, String email, String nivel, String idioma, String residencia) {
+    public Vendedor(Long id, String nombre, String descripcion, Nivel nivel, String email, Empresa empresa, Pais paises){
         this.id = id;
-        this.titulo = titulo;
         this.nombre = nombre;
-        this.antiguedad = antiguedad;
         this.descripcion = descripcion;
-        this.email = email;
         this.nivel = nivel;
-        this.idioma = idioma;
-        this.residencia = residencia;
+        this.email = email;
+        this.empresa = empresa;
+        this.paises = paises;
     }
 
     public Long getId() {
@@ -61,20 +73,28 @@ public class Vendedor {
         this.id = id;
     }
 
-    public List<Trabajos> getServicios() {
-        return trabajos;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setServicios(List<Trabajos> trabajos) {
-        this.trabajos = trabajos;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public Pais getPaises() {
+        return paises;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setPaises(Pais paises) {
+        this.paises = paises;
+    }
+
+    public Nivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Nivel nivel) {
+        this.nivel = nivel;
     }
 
     public String getNombre() {
@@ -85,20 +105,20 @@ public class Vendedor {
         this.nombre = nombre;
     }
 
-    public Integer getAntiguedad() {
-        return antiguedad;
-    }
-
-    public void setAntiguedad(Integer antiguedad) {
-        this.antiguedad = antiguedad;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public String getEmail() {
@@ -109,48 +129,12 @@ public class Vendedor {
         this.email = email;
     }
 
-    public String getNivel() {
-        return nivel;
+    public Set<Trabajo> getTrabajo() {
+        return trabajo;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
-    }
-
-    public String getIdioma() {
-        return idioma;
-    }
-
-    public void setIdioma(String idioma) {
-        this.idioma = idioma;
-    }
-
-    public String getResidencia() {
-        return residencia;
-    }
-
-    public void setResidencia(String residencia) {
-        this.residencia = residencia;
-    }
-
-    public void addServicio(Trabajos trabajos){
-        this.trabajos.add(trabajos);
-        trabajos.getVendedores().add(this);
-    }
-    @Override
-    public String toString() {
-        return "Vendedor{" +
-                "id=" + id +
-                ", servicios=" + trabajos +
-                ", titulo='" + titulo + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", antiguedad=" + antiguedad +
-                ", descripcion='" + descripcion + '\'' +
-                ", email='" + email + '\'' +
-                ", nivel='" + nivel + '\'' +
-                ", idioma='" + idioma + '\'' +
-                ", residencia='" + residencia + '\'' +
-                '}';
+    public void setTrabajo(Set<Trabajo> trabajo) {
+        this.trabajo = trabajo;
     }
 
     @Override
