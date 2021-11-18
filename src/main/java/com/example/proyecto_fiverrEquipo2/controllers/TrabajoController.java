@@ -1,8 +1,10 @@
 package com.example.proyecto_fiverrEquipo2.controllers;
 
 import com.example.proyecto_fiverrEquipo2.Dto.TrabajoDto;
+import com.example.proyecto_fiverrEquipo2.entities.Categoria;
 import com.example.proyecto_fiverrEquipo2.entities.Review;
 import com.example.proyecto_fiverrEquipo2.entities.Trabajo;
+import com.example.proyecto_fiverrEquipo2.entities.Vendedor;
 import com.example.proyecto_fiverrEquipo2.repository.CategoriaRepository;
 import com.example.proyecto_fiverrEquipo2.repository.ReviewRepository;
 import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
@@ -10,14 +12,12 @@ import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class TrabajoController {
@@ -90,8 +90,21 @@ public class TrabajoController {
      * Request
      * Response
      */
+
     @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajos/{id}")
+    public ResponseEntity<Trabajo> findByIdJobs(@PathVariable Long id) {
+        Optional<Trabajo> trabajosOpt = trabajoRepository.findById(id);
+        if (trabajosOpt.isPresent()) {
+            return ResponseEntity.ok(trabajosOpt.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/trabajo/{id}")
     public ResponseEntity<Trabajo> findById(@PathVariable Long id) {
         Optional<Trabajo> trabajosOpt = trabajoRepository.findById(id);
         if (trabajosOpt.isPresent()) {
@@ -99,5 +112,62 @@ public class TrabajoController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /**
+     * Crear un nuevo trabajo en la BBDD
+     *
+     * @param trabajo
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping("/api/trabajo")
+    public ResponseEntity<Trabajo> create(@RequestBody Trabajo trabajo) {
+        if(trabajo.getId() != null) {
+            log.warn("Intentando crear un trabajo con id");
+            return ResponseEntity.badRequest().build();
+        }
+
+        Set<Vendedor> vendedor = trabajo.getVendedores();
+
+        for (Vendedor vendedores: vendedor) {
+            if(vendedores.getId() == null) {
+                log.info("Creando vendedor inexistente: " + vendedores.getNombre());
+                vendedorRepository.save(vendedores);
+            }
+        }
+
+        Set<Categoria> categorias = trabajo.getCategorias();
+
+        for (Categoria categoria: categorias) {
+            if(categoria.getId() == null) {
+                log.info("Creando categoría inexistente: " + categoria.getNombre());
+                categoriaRepository.save(categoria);
+            }
+        }
+
+        Trabajo trabajoAGuardar = new Trabajo(
+
+                null,
+                trabajo.getNombre(),
+                trabajo.getDescripcion(),
+                trabajo.getImagen(),
+                trabajo.getPrecio(),
+                trabajo.getFecha_Publicacion(),
+                trabajo.getIdiomas(),
+                trabajo.getPaises()
+
+        );
+
+        for (Vendedor vendedores: trabajo.getVendedores()) {
+            trabajoAGuardar.addVendedor(vendedores);
+        }
+        for (Categoria categoria: trabajo.getCategorias()) {
+            trabajoAGuardar.addCategoria(categoria);
+        }
+
+        Trabajo result = trabajoRepository.save(trabajoAGuardar);
+        return ResponseEntity.ok(result);
     }
 }

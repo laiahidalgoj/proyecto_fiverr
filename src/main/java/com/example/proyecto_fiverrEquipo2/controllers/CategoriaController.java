@@ -6,10 +6,7 @@ import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +48,32 @@ public class CategoriaController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /**
+     * Crear categoria nueva en la bbdd.
+     *
+     * @param categoria
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping("/api/categorias")
+    public ResponseEntity<Categoria> create(@RequestBody Categoria categoria) {
+        if (categoria.getId() != null) {
+            log.warn("Intentando crear una categoría con id");
+            return ResponseEntity.badRequest().build();
+        }
+        List<Categoria> categorias = categoriaRepository.findAll();
+        for (Categoria categoriaExistente : categorias) {
+            if (categoriaExistente.getNombre().equals(categoria.getNombre())) {
+                log.warn("Intentando crear una categoría ya existente");
+                return ResponseEntity.badRequest().build();
+            }
+        }
+
+        Categoria result = categoriaRepository.save(categoria);
+        return ResponseEntity.ok(result);
     }
 
 }

@@ -59,6 +59,17 @@ public class Trabajo {
     public Trabajo() {
     }
 
+    public Trabajo(Long id, String nombre, String descripcion, String imagen, Double precio, LocalDate fecha_Publicacion, Idioma idiomas, Pais paises){
+        this.id =id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.precio = precio;
+        this.fecha_Publicacion = fecha_Publicacion;
+        this.idiomas = idiomas;
+        this.paises = paises;
+    }
+
     public Trabajo(Long id, String nombre, String descripcion, Double precio, Idioma idiomas, Pais paises) {
         this.id = id;
         this.nombre = nombre;
