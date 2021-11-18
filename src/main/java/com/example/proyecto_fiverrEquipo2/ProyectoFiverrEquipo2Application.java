@@ -42,6 +42,7 @@ public class ProyectoFiverrEquipo2Application {
 		Trabajo trabajo3 = new Trabajo(null, "Empresa", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
 		Trabajo trabajo4 = new Trabajo(null, "Empresa", "Diseños en WordPress", 1500.25, Idioma.Español, Pais.España);
 		Trabajo trabajo5 = new Trabajo(null, "Empresa", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo6 = new Trabajo(null, "Empresa", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
 
 		// ASIGNAMOS FECHAS A CADA TRABAJO
 		trabajo1.setFecha_Publicacion(fecha_Publicacion1);
@@ -109,6 +110,7 @@ public class ProyectoFiverrEquipo2Application {
 		trabajo3.addCategoria(categoria4);
 		trabajo4.addCategoria(categoria2);
 		trabajo5.addCategoria(categoria5);
+		trabajo6.addCategoria(categoria1);
 
 
 		// ASIGNAMOS TRABAJO A VENDEDOR
