@@ -71,4 +71,24 @@ public class VendedorController {
         Vendedor result = vendedorRepository.save(vendedor);
         return ResponseEntity.ok(result);
     }
+
+    /**
+     * Actualizar un vendedor en la bbdd.
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PutMapping("/api/vendedor")
+    public ResponseEntity<Vendedor> update(@RequestBody Vendedor vendedor) {
+        if (vendedor.getId() == null) {
+            log.warn("Intentando actualizar un vendedor sin añadir el id");
+            return ResponseEntity.badRequest().build();
+        }
+        if (!vendedorRepository.existsById(vendedor.getId())) {
+            log.warn("Intentando actualizar un vendedor con id inexistente");
+            return ResponseEntity.notFound().build();
+        }
+
+        Vendedor result = vendedorRepository.save(vendedor);
+        return ResponseEntity.ok(result);
+    }
 }
