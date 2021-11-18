@@ -6,10 +6,7 @@ import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +28,7 @@ public class VendedorController {
      * Buscar todos los vendedores en BBDD
      */
     @CrossOrigin
-    @GetMapping("/api/vendedores")
+    @GetMapping("/api/vendedor")
     public List<Vendedor> findAll() {
         return vendedorRepository.findAll();
     }
@@ -50,5 +47,28 @@ public class VendedorController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /**
+     * Crear vendedor en la bbdd.
+     *
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping("/api/vendedor")
+    public ResponseEntity<Vendedor> create(@RequestBody Vendedor vendedor) {
+        if (vendedor.getId() != null) {
+            log.warn("Intentando crear un vendedor con id");
+            return ResponseEntity.badRequest().build();
+        }
+        List<Vendedor> vendedores = vendedorRepository.findAll();
+        for (Vendedor vendedorExistente : vendedores) {
+            if (vendedorExistente.getNombre().equals(vendedor.getNombre())) {
+                log.warn("Intentando crear un vendedor ya existente");
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        Vendedor result = vendedorRepository.save(vendedor);
+        return ResponseEntity.ok(result);
     }
 }
