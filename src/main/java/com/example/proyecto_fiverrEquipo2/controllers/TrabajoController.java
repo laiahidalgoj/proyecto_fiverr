@@ -14,10 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class TrabajoController {
@@ -169,5 +166,91 @@ public class TrabajoController {
 
         Trabajo result = trabajoRepository.save(trabajoAGuardar);
         return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Actualizar un trabajo en BBDD
+     *
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PutMapping("/api/trabajo")
+    public ResponseEntity<Trabajo> update(@RequestBody Trabajo trabajo) {
+        if (trabajo.getId() == null) {
+            log.warn("Intentando actualizar un trabajo inexistente");
+            return ResponseEntity.badRequest().build();
+        }
+        if (!trabajoRepository.existsById(trabajo.getId())) {
+            log.warn("Intentando actualizar un trabajo inexistente");
+            return ResponseEntity.notFound().build();
+        }
+
+        Set<Categoria> categorias = trabajo.getCategorias();
+
+        for (Categoria categoria: categorias) {
+            if(categoria.getId() == null) {
+                log.info("Creando categoría inexistente: " + categoria.getNombre());
+                categoriaRepository.save(categoria);
+            }
+        }
+
+        Set<Vendedor> vendedores = trabajo.getVendedores();
+
+        for (Vendedor vendedor: vendedores) {
+            if(vendedor.getId() == null) {
+                log.info("Creando vendedor inexistente: " + vendedor.getNombre());
+                vendedorRepository.save(vendedor);
+            }
+        }
+
+        Optional<Trabajo> trabajoOpt = trabajoRepository.findById(trabajo.getId());
+        if (trabajoOpt.isPresent()) {
+            Trabajo trabajoOld = trabajoOpt.get();
+            eliminarCategorias(trabajoOld);
+            eliminarVendedores(trabajoOld);
+        }
+
+        Trabajo trabajoAGuardar = new Trabajo(
+
+                trabajo.getId(),
+                trabajo.getNombre(),
+                trabajo.getDescripcion(),
+                trabajo.getImagen(),
+                trabajo.getPrecio(),
+                trabajo.getFecha_Publicacion(),
+                trabajo.getIdiomas(),
+                trabajo.getPaises()
+        );
+
+        for (Vendedor vendedor: trabajo.getVendedores()) {
+            trabajoAGuardar.addVendedor(vendedor);
+        }
+        for (Categoria categoria: trabajo.getCategorias()) {
+            trabajoAGuardar.addCategoria(categoria);
+        }
+
+        Trabajo result = trabajoRepository.save(trabajoAGuardar);
+        log.info("Actualizando trabajo: " + trabajoAGuardar.getId());
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Método que elimina cada trabajo de las categorias.
+     */
+    private void eliminarCategorias(Trabajo trabajo) {
+        Set<Categoria> categoriasEliminar = new HashSet<>(trabajo.getCategorias());
+        for (Categoria categoria : categoriasEliminar) {
+            trabajo.removeCategoria(categoria, true);
+        }
+    }
+
+    /**
+     * Método que elimina cada trabajo de los vendedores.
+     */
+    private void eliminarVendedores(Trabajo trabajo) {
+        Set<Vendedor> vendedoresEliminar = new HashSet<>(trabajo.getVendedores());
+        for (Vendedor vendedor: vendedoresEliminar) {
+            trabajo.removeVendedor(vendedor, true);
+        }
     }
 }
