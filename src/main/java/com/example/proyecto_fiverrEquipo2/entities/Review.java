@@ -11,10 +11,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long idVendedor;
     private String descripcion;
-    private String nom_user;
-    private String residencia;
     private Date fecha_Publicacion;
 
     @Column()
@@ -49,36 +46,12 @@ public class Review {
         this.id = id;
     }
 
-    public Long getIdVendedor() {
-        return idVendedor;
-    }
-
-    public void setIdVendedor(Long idVendedor) {
-        this.idVendedor = idVendedor;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getNom_user() {
-        return nom_user;
-    }
-
-    public void setNom_user(String nom_user) {
-        this.nom_user = nom_user;
-    }
-
-    public String getResidencia() {
-        return residencia;
-    }
-
-    public void setResidencia(String residencia) {
-        this.residencia = residencia;
     }
 
     public Date getFecha_Publicacion() {

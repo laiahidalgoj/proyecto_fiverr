@@ -7,10 +7,7 @@ import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,21 +28,21 @@ public class ReviewController {
     }
 
     /**
-     * Buscar todas las reseñas en BBDD.
+     * Buscar todas las reviews en BBDD.
      */
     @CrossOrigin
-    @GetMapping("/api/reseñas")
+    @GetMapping("/api/reviews")
     public List<Review> findAll() {
         return reviewRepository.findAll();
     }
 
     /**
-     * Buscar reseñas por  id
+     * Buscar reviews por id
      * Request
      * Response
      */
     @CrossOrigin
-    @GetMapping("/api/reseñas/{id}")
+    @GetMapping("/api/reviews/{id}")
     public ResponseEntity<Review> findById(@PathVariable Long id) {
         Optional<Review> reseñaOpt = reviewRepository.findById(id);
         if (reseñaOpt.isPresent()) {
@@ -54,4 +51,24 @@ public class ReviewController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Crear nueva review en la bbdd.
+     *n
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping("/api/reviews")
+    public ResponseEntity<Review> create(@RequestBody Review review) {
+        if (review.getId() != null) {
+            log.warn("Intentando crear una review con id");
+            return ResponseEntity.badRequest().build();
+        }
+
+        Review result = reviewRepository.save(review);
+        return ResponseEntity.ok(result);
+    }
+
+
+
 }
