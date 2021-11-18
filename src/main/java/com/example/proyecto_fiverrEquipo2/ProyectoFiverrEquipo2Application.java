@@ -37,11 +37,11 @@ public class ProyectoFiverrEquipo2Application {
 		LocalDate fecha_Publicacion5 = LocalDate.of(2021, Calendar.JULY, 13);
 
 		// CREAMOS TRABAJOS
-		Trabajo trabajo1 = new Trabajo(null, "LaiaIT", "Desarrollo software", 800.50, Idioma.Español, Pais.España);
-		Trabajo trabajo2 = new Trabajo(null, "RafaIT", "Diseños responsive", 900.30, Idioma.Español, Pais.EEUU);
-		Trabajo trabajo3 = new Trabajo(null, "LuisIT", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
-		Trabajo trabajo4 = new Trabajo(null, "ToniIT", "Diseños en WordPress", 1500.25, Idioma.Español, Pais.España);
-		Trabajo trabajo5 = new Trabajo(null, "SoftIT", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo1 = new Trabajo(null, "Empresa", "Desarrollo software", 800.50, Idioma.Español, Pais.España);
+		Trabajo trabajo2 = new Trabajo(null, "Empresa", "Diseños responsive", 900.30, Idioma.Español, Pais.EEUU);
+		Trabajo trabajo3 = new Trabajo(null, "Empresa", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
+		Trabajo trabajo4 = new Trabajo(null, "Empresa", "Diseños en WordPress", 1500.25, Idioma.Español, Pais.España);
+		Trabajo trabajo5 = new Trabajo(null, "Empresa", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
 
 		// ASIGNAMOS FECHAS A CADA TRABAJO
 		trabajo1.setFecha_Publicacion(fecha_Publicacion1);

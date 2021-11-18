@@ -1,6 +1,7 @@
 package com.example.proyecto_fiverrEquipo2.controllers;
 
 import com.example.proyecto_fiverrEquipo2.entities.Categoria;
+import com.example.proyecto_fiverrEquipo2.entities.Trabajo;
 import com.example.proyecto_fiverrEquipo2.repository.CategoriaRepository;
 import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import org.slf4j.Logger;
@@ -48,6 +49,7 @@ public class CategoriaController {
         } else {
             return ResponseEntity.notFound().build();
         }
+
     }
 
     /**
@@ -70,6 +72,27 @@ public class CategoriaController {
                 log.warn("Intentando crear una categoría ya existente");
                 return ResponseEntity.badRequest().build();
             }
+        }
+
+        Categoria result = categoriaRepository.save(categoria);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Actualizar una categoría en la bbdd.
+     *
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PutMapping("/api/categorias")
+    public ResponseEntity<Categoria> update(@RequestBody Categoria categoria) {
+        if (categoria.getId() == null) {
+            log.warn("Intentando actualizar una categoría sin añadir el id");
+            return ResponseEntity.badRequest().build();
+        }
+        if (!categoriaRepository.existsById(categoria.getId())) {
+            log.warn("Intentando actualizar una categoría con id inexistente");
+            return ResponseEntity.notFound().build();
         }
 
         Categoria result = categoriaRepository.save(categoria);
