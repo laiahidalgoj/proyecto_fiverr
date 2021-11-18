@@ -69,6 +69,26 @@ public class ReviewController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * Actualizar una reviews en la bbdd.
+     *
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PutMapping("/api/reviews")
+    public ResponseEntity<Review> update(@RequestBody Review review) {
+        if (review.getId() == null) {
+            log.warn("Intentando actualizar una review sin añadir el id");
+            return ResponseEntity.badRequest().build();
+        }
+        if (!reviewRepository.existsById(review.getId())) {
+            log.warn("Intentando actualizar una review con id inexistente");
+            return ResponseEntity.notFound().build();
+        }
+
+        Review result = reviewRepository.save(review);
+        return ResponseEntity.ok(result);
+    }
 
 
 }
