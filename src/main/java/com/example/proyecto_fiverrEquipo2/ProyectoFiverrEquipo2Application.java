@@ -34,13 +34,19 @@ public class ProyectoFiverrEquipo2Application {
 		LocalDate fecha_Publicacion5 = LocalDate.of(2021, Calendar.JULY, 13);
 
 		// CREAMOS TRABAJOS
-		Trabajo trabajo1 = new Trabajo(null, "Empresa1", "Desarrollo software", 800.50, Idioma.Español, Pais.España);
-		Trabajo trabajo2 = new Trabajo(null, "Empresa2", "Diseños responsive", 900.30, Idioma.Español, Pais.EEUU);
+		Trabajo trabajo1 = new Trabajo(null, "Empresa1", "Diseño UX/UI", 800.50, Idioma.Español, Pais.España);
+		Trabajo trabajo2 = new Trabajo(null, "Empresa2", "Branding & Animación 3D", 900.30, Idioma.Español, Pais.EEUU);
 		Trabajo trabajo3 = new Trabajo(null, "Empresa3", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
-		Trabajo trabajo4 = new Trabajo(null, "Empresa4", "Diseños en WordPress", 1500.25, Idioma.Español, Pais.España);
-		Trabajo trabajo5 = new Trabajo(null, "Empresa5", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
-		Trabajo trabajo6 = new Trabajo(null, "Empresa6", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo4 = new Trabajo(null, "Empresa4", "Diseños SEO optimizado", 1500.25, Idioma.Español, Pais.España);
+		Trabajo trabajo5 = new Trabajo(null, "Empresa5", "Diseño Responsive", 750.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo6 = new Trabajo(null, "Empresa6", "Desarrollo web", 1220.50, Idioma.Frances, Pais.Francia);
 
+		trabajo1.setImagen("https://image.freepik.com/vector-gratis/fondo-degradado-ui-ux_23-2149065782.jpg");
+		trabajo2.setImagen("https://image.freepik.com/vector-gratis/tema-colorido-conjunto-emoji_79603-1264.jpg");
+		trabajo3.setImagen("https://image.freepik.com/vector-gratis/fondo-abstracto-colorido-diseno-plano_23-2149120550.jpg");
+		trabajo4.setImagen("https://image.freepik.com/vector-gratis/optimizacion-seo_24908-55896.jpg");
+		trabajo5.setImagen("https://image.freepik.com/psd-gratis/mockup-dispositivos-electronicos_23-2147864572.jpg");
+		trabajo6.setImagen("https://image.freepik.com/vector-gratis/desarrolladores-web-dibujados-mano_23-2148815976.jpg");
 
 		// ASIGNAMOS FECHAS A CADA TRABAJO
 		trabajo1.setFecha_Publicacion(fecha_Publicacion1);
@@ -66,6 +72,8 @@ public class ProyectoFiverrEquipo2Application {
 
 		vendedor1.setImagen("https://image.freepik.com/foto-gratis/mujer-positiva-sonriendo-modelo-divertido-que-presenta-cerca-pared-rosada-estudio_158538-3433.jpg");
 		vendedor2.setImagen("https://image.freepik.com/foto-gratis/joven-mujer-hermosa-moda-mujer-ropa-casual-verano-guinando-ojo-modelo-divertido-aislado-pared-azul_158538-7772.jpg");
+		vendedor3.setImagen("https://image.freepik.com/foto-gratis/retrato-hombre-guapo-barba-sonrie-felizmente-parte-delantera-muestra-dientes-perfectos-blancos-tiene-buen-humor-siente-satisfecho-vestido-poses-camiseta-rosa-basica-interior_273609-53432.jpg");
+		vendedor4.setImagen("https://image.freepik.com/foto-gratis/chico-moderno-joven-guapo-cintura-arriba-cerdas-peinado-desordenado-usar-camiseta-roja-tomarse-manos-lados-posicion-loto-meditar-practicar-yoga-camara-mirada-divertida-labios-doblados-pared-blanca_176420-37087.jpg");
 
 		// GUARDAMOS VENDEDORES EN EL REPOSITORIO
 		vendedorRepository.saveAll(Arrays.asList(vendedor1, vendedor2, vendedor3, vendedor4, vendedor5, vendedor6));
