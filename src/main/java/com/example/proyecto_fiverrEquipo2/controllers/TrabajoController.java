@@ -253,4 +253,83 @@ public class TrabajoController {
             trabajo.removeVendedor(vendedor, true);
         }
     }
+
+    // TODO
+
+    /**
+     * Eliminar un trabajo de la bbdd.
+     *
+     * @param id
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN')")
+    @DeleteMapping("/api/trabajo/{id}")
+    public ResponseEntity<Trabajo> delete(@PathVariable Long id) {
+
+        if (!trabajoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Optional<Trabajo> trabajoOpt = trabajoRepository.findById(id);
+        if (trabajoOpt.isPresent()) {
+            Trabajo trabajoAnti = trabajoOpt.get();
+            eliminarCategorias(trabajoAnti);
+            eliminarVendedores(trabajoAnti);
+        }
+
+        trabajoRepository.deleteById(id);
+        log.info("Eliminando trabajo: " + id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Eliminar todos los trabajos de la base de datos.
+     *
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @DeleteMapping("/api/trabajos")
+    public ResponseEntity<Trabajo> deleteAll() {
+
+        List<Trabajo> trabajos = trabajoRepository.findAll();
+        for (Trabajo trabajo : trabajos) {
+            eliminaCategorias(trabajo);
+            eliminaVendedores(trabajo);
+
+        }
+
+        List<Categoria> categorias = categoriaRepository.findAll();
+        List<Vendedor> vendedores = vendedorRepository.findAll();
+
+        vendedorRepository.deleteAll();
+        log.info("Eliminando todos los trabajos");
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Método que desvincula cada trabajo de ls categorias que están ligadas a ellos.
+     *
+     * @param trabajo
+     */
+    private void eliminaCategorias(Trabajo trabajo) {
+        Set<Categoria> categoriasABorrar = new HashSet<>(trabajo.getCategorias());
+        for (Categoria categoria : categoriasABorrar) {
+            trabajo.removeCategoria(categoria, true);
+        }
+    }
+
+    /**
+     * Método que desvincula cada trabajo de los vendedores.
+     *
+     * @param trabajo
+     */
+    private void eliminaVendedores(Trabajo trabajo) {
+        Set<Vendedor> vendedorABorrar = new HashSet<>(trabajo.getVendedores());
+        for (Vendedor vendedor: vendedorABorrar) {
+            trabajo.removeVendedor(vendedor, true);
+        }
+    }
+
 }

@@ -149,4 +149,5 @@ public class Vendedor {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }
