@@ -51,7 +51,6 @@ public class Trabajo {
     private String imagen;
     private String categoria;
     private Integer reviews;
-    private String idVendedor;
     private LocalDate fecha_Publicacion;
 
     //CONSTRUCTORES
@@ -204,14 +203,6 @@ public class Trabajo {
 
     public void setReviews(Integer reviews) {
         this.reviews = reviews;
-    }
-
-    public String getIdVendedor() {
-        return idVendedor;
-    }
-
-    public void setIdVendedor(String idVendedor) {
-        this.idVendedor = idVendedor;
     }
 
     public LocalDate getFecha_Publicacion() {
