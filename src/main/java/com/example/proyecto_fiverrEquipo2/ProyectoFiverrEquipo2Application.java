@@ -51,9 +51,10 @@ public class ProyectoFiverrEquipo2Application {
 		trabajo3.setFecha_Publicacion(fecha_Publicacion3);
 		trabajo4.setFecha_Publicacion(fecha_Publicacion4);
 		trabajo5.setFecha_Publicacion(fecha_Publicacion5);
+		trabajo6.setFecha_Publicacion(fecha_Publicacion5);
 
 		// GUARDAMOS TRABAJOS EN EL REPOSITORIO
-		trabajoRepository.saveAll(Arrays.asList(trabajo1, trabajo2, trabajo3, trabajo4, trabajo5));
+		trabajoRepository.saveAll(Arrays.asList(trabajo1, trabajo2, trabajo3, trabajo4, trabajo5, trabajo6));
 
 		System.out.println("Número de trabajos en base de datos " +  trabajoRepository.findAll().size());
 
@@ -63,9 +64,10 @@ public class ProyectoFiverrEquipo2Application {
 		Vendedor vendedor3 = new Vendedor(null, "Luis", "Diseño tu web creativo y único", Nivel.Nivel2, "luis@luis.es", Empresa.Autonomo, Pais.Italia);
 		Vendedor vendedor4 = new Vendedor(null, "Toni", "Diseño tu sitio web con wordpress", Nivel.Nivel2, "toni@toni.es", Empresa.Autonomo, Pais.España);
 		Vendedor vendedor5 = new Vendedor(null, "Marcos", "Diseñamos tu web desde 0", Nivel.Nivel1, "marcos@marcos.es", Empresa.Privada, Pais.Francia);
+		Vendedor vendedor6 = new Vendedor(null, "Marcos", "Diseñamos tu web desde 0", Nivel.Nivel1, "marcos@marcos.es", Empresa.Privada, Pais.Francia);
 
 		// GUARDAMOS VENDEDORES EN EL REPOSITORIO
-		vendedorRepository.saveAll(Arrays.asList(vendedor1, vendedor2, vendedor3, vendedor4, vendedor5));
+		vendedorRepository.saveAll(Arrays.asList(vendedor1, vendedor2, vendedor3, vendedor4, vendedor5, vendedor6));
 
 		System.out.println("Número de vendedores en base de datos " +  vendedorRepository.findAll().size());
 
@@ -119,9 +121,10 @@ public class ProyectoFiverrEquipo2Application {
 		trabajo3.addVendedor(vendedor3);
 		trabajo4.addVendedor(vendedor4);
 		trabajo5.addVendedor(vendedor5);
+		trabajo6.addVendedor(vendedor6);
 
 		// GUARDAMOS TRABAJOS A REPOSITORIO
-		trabajoRepository.saveAll(Arrays.asList(trabajo1, trabajo2, trabajo3, trabajo4, trabajo5));
+		trabajoRepository.saveAll(Arrays.asList(trabajo1, trabajo2, trabajo3, trabajo4, trabajo5, trabajo6));
 
 		//CREAMOS REVIEWS
 		Review review1 = new Review(null,5,"Excelente trabajo", trabajo1, vendedor1);

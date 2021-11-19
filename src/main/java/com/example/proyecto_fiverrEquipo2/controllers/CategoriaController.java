@@ -12,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class CategoriaController {
@@ -46,6 +43,7 @@ public class CategoriaController {
      * Buscar categorías por  id
      * Request
      * Response
+     *
      * @return
      */
     @CrossOrigin
@@ -59,43 +57,39 @@ public class CategoriaController {
 
             // ------
             List<Review> reviews = reviewRepository.findAll();
-            List<TrabajoDto> trabajoDto = new ArrayList<>();
+            List<TrabajoDto> trabDto = new ArrayList<>();
             TrabajoDto trabajosDto = new TrabajoDto();
             for (int i = 0; i < trabajos.size(); i++) {
                 trabajosDto = new TrabajoDto(trabajos.get(i).getId(), trabajos.get(i).getNombre(), trabajos.get(i).getImagen(), trabajos.get(i).getDescripcion(), trabajos.get(i).getPrecio(), trabajos.get(i).getCategorias(), trabajos.get(i).getVendedores(), trabajos.get(i).getFecha_Publicacion(), trabajos.get(i).getPaises(), trabajos.get(i).getIdiomas());
 
-                int sumaReviews = 0;
-                int cantReviews = 0;
-                double promedio = 0;
+                if (id.equals(trabajos.get(i).getCategorias()))
 
-                for (int j = 0; j < reviews.size(); j++) {
-                    if ((reviews.get(j).getTrabajos()) == (trabajos.get(i))) {
-                        cantReviews++;
-                        sumaReviews += reviews.get(j).getPuntuacion();
-                    }
-                }
+//                int sumaReviews = 0;
+//                int cantReviews = 0;
+//                double promedio = 0;
+//
+//                for (int j = 0; j < reviews.size(); j++) {
+//                    if ((reviews.get(j).getTrabajos()) == (trabajos.get(i))) {
+//                        cantReviews++;
+//                        sumaReviews += reviews.get(j).getPuntuacion();
+//                    }
+//                }
+//
+//                if (cantReviews > 0) {
+//                    trabajosDto.setReviews(cantReviews);
+//                    promedio = sumaReviews / cantReviews;
+//                    trabajosDto.setPromedio(promedio);
+//                }
 
-                if (cantReviews > 0) {
-                    trabajosDto.setReviews(cantReviews);
-                    promedio = sumaReviews / cantReviews;
-                    trabajosDto.setPromedio(promedio);
-                }
-
-                trabajoDto.add(trabajosDto);
+                    trabDto.add(trabajosDto);
             }
 
             return trabajosDto;
 
-            }
-
-            return null;
         }
 
-
-//            return ResponseEntity.ok(categoriaOpt.get());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
+        return null;
+    }
 
 
     /**
@@ -126,7 +120,6 @@ public class CategoriaController {
 
     /**
      * Actualizar una categoría en la bbdd.
-     *
      */
     @CrossOrigin
 //    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
@@ -145,4 +138,54 @@ public class CategoriaController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * Eliminar una categoría de la BBDD.
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @DeleteMapping("/api/categorias/{id}")
+    public ResponseEntity<Categoria> delete(@PathVariable Long id) {
+
+        if (!categoriaRepository.existsById(id)) {
+            log.warn("Intentando eliminar una categoría inexistente");
+            return ResponseEntity.notFound().build();
+        }
+
+        Optional<Categoria> categoriaOpt = categoriaRepository.findById(id);
+        if (categoriaOpt.isPresent()) {
+            Categoria categoria = categoriaOpt.get();
+            Set<Trabajo> trabajos = categoria.getTrabajos();
+            for (Trabajo trabajo : trabajos) {
+                trabajo.removeCategoria(categoria, false);
+                trabajoRepository.save(trabajo);
+            }
+        }
+
+        categoriaRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Eliminar todas las categorias de la base de datos
+     *
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @DeleteMapping("/api/categorias")
+    public ResponseEntity<Categoria> deleteAll() {
+        List<Categoria> categorias = categoriaRepository.findAll();
+
+        for (Categoria categoria : categorias) {
+            Set<Trabajo> trabajos = categoria.getTrabajos();
+            for (Trabajo trabajo : trabajos) {
+                trabajo.removeCategoria(categoria, false);
+                trabajoRepository.save(trabajo);
+            }
+        }
+        categoriaRepository.deleteAll();
+
+        return ResponseEntity.noContent().build();
+    }
 }

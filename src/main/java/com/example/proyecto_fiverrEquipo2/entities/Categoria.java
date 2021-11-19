@@ -69,6 +69,13 @@ public class Categoria {
         this.descripcion = descripcion;
     }
 
+    public void removeTrabajos(Trabajo trabajo, boolean trabajoExists) {
+        trabajos.remove(trabajo);
+        if (trabajoExists) {
+            trabajo.getCategorias().remove(this);
+        }
+    }
+
     // métodos
     @Override
     public boolean equals(Object obj) {
@@ -82,4 +89,6 @@ public class Categoria {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+
 }
