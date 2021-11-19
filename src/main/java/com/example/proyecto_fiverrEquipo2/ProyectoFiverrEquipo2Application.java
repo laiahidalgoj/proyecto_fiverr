@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -37,12 +38,13 @@ public class ProyectoFiverrEquipo2Application {
 		LocalDate fecha_Publicacion5 = LocalDate.of(2021, Calendar.JULY, 13);
 
 		// CREAMOS TRABAJOS
-		Trabajo trabajo1 = new Trabajo(null, "Empresa", "Desarrollo software", 800.50, Idioma.Español, Pais.España);
-		Trabajo trabajo2 = new Trabajo(null, "Empresa", "Diseños responsive", 900.30, Idioma.Español, Pais.EEUU);
-		Trabajo trabajo3 = new Trabajo(null, "Empresa", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
-		Trabajo trabajo4 = new Trabajo(null, "Empresa", "Diseños en WordPress", 1500.25, Idioma.Español, Pais.España);
-		Trabajo trabajo5 = new Trabajo(null, "Empresa", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
-		Trabajo trabajo6 = new Trabajo(null, "Empresa", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo1 = new Trabajo(null, "Empresa1", "Desarrollo software", 800.50, Idioma.Español, Pais.España);
+		Trabajo trabajo2 = new Trabajo(null, "Empresa2", "Diseños responsive", 900.30, Idioma.Español, Pais.EEUU);
+		Trabajo trabajo3 = new Trabajo(null, "Empresa3", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
+		Trabajo trabajo4 = new Trabajo(null, "Empresa4", "Diseños en WordPress", 1500.25, Idioma.Español, Pais.España);
+		Trabajo trabajo5 = new Trabajo(null, "Empresa5", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo6 = new Trabajo(null, "Empresa6", "Diseñamos lo que quieras", 750.50, Idioma.Frances, Pais.Francia);
+
 
 		// ASIGNAMOS FECHAS A CADA TRABAJO
 		trabajo1.setFecha_Publicacion(fecha_Publicacion1);
@@ -78,33 +80,18 @@ public class ProyectoFiverrEquipo2Application {
 		Categoria categoria4 = new Categoria(null, "Diseño creativo");
 		Categoria categoria5 = new Categoria(null, "Diseño 360");
 
+		List<Categoria> categorias = new ArrayList<Categoria>(Arrays.asList(categoria1, categoria2, categoria3, categoria4, categoria5));
+//		categorias.forEach(System.out::println);
+
 		// GUARDAMOS CATEGORIAS EN EL REPOSITORIO
-		categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4, categoria5));
+		categoriaRepository.saveAll(categorias);
+
+		List<Categoria> categorias2 = categoriaRepository.findAll();
+		for(Categoria categoria : categorias2){
+			System.out.println(categoria.getId());
+		}
 
 		System.out.println("Número de categorías: " + categoriaRepository.findAll().size());
-
-		//creamos lista de categorias
-		List<Categoria> cat1 = Arrays.asList(categoria1);
-		List<Categoria> cat2 = Arrays.asList(categoria1);
-		List<Categoria> cat3 = Arrays.asList(categoria1);
-		List<Categoria> cat4 = Arrays.asList(categoria1);
-		List<Categoria> cat5 = Arrays.asList(categoria1);
-
-		for (Categoria categoria : cat1) {
-			trabajo1.addCategoria(categoria);
-			}
-		for (Categoria categoria : cat2) {
-			trabajo2.addCategoria(categoria);
-		}
-		for (Categoria categoria : cat3) {
-			trabajo3.addCategoria(categoria);
-		}
-		for (Categoria categoria : cat4) {
-			trabajo4.addCategoria(categoria);
-		}
-		for (Categoria categoria : cat5) {
-			trabajo5.addCategoria(categoria);
-		}
 
 		//AÑADIMOS CATEGORIAS A CADA TRABAJO
 		trabajo1.addCategoria(categoria1);
@@ -113,7 +100,6 @@ public class ProyectoFiverrEquipo2Application {
 		trabajo4.addCategoria(categoria2);
 		trabajo5.addCategoria(categoria5);
 		trabajo6.addCategoria(categoria1);
-
 
 		// ASIGNAMOS TRABAJO A VENDEDOR
 		trabajo1.addVendedor(vendedor1);
@@ -125,6 +111,14 @@ public class ProyectoFiverrEquipo2Application {
 
 		// GUARDAMOS TRABAJOS A REPOSITORIO
 		trabajoRepository.saveAll(Arrays.asList(trabajo1, trabajo2, trabajo3, trabajo4, trabajo5, trabajo6));
+
+		List<Categoria> categorias3 = categoriaRepository.findAll();
+		for(Categoria categoria : categorias3){
+			System.out.println(categoria.getNombre());
+			for(Trabajo trabajo : categoria.getTrabajos()){
+				System.out.println(trabajo.getId());
+			}
+		}
 
 		//CREAMOS REVIEWS
 		Review review1 = new Review(null,5,"Excelente trabajo", trabajo1, vendedor1);

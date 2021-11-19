@@ -154,13 +154,16 @@ public class TrabajoController {
                 trabajo.getFecha_Publicacion(),
                 trabajo.getIdiomas(),
                 trabajo.getPaises()
-
         );
 
-        for (Vendedor vendedores: trabajo.getVendedores()) {
+        List<Categoria> categorias2 = new ArrayList<>(trabajo.getCategorias());
+        List<Vendedor> vendedores2 = new ArrayList<>(trabajo.getVendedores());
+
+
+        for (Vendedor vendedores: vendedores2) {
             trabajoAGuardar.addVendedor(vendedores);
         }
-        for (Categoria categoria: trabajo.getCategorias()) {
+        for (Categoria categoria: categorias2) {
             trabajoAGuardar.addCategoria(categoria);
         }
 

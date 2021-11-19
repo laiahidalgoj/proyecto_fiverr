@@ -48,45 +48,25 @@ public class CategoriaController {
      */
     @CrossOrigin
     @GetMapping("/api/categorias/{id}")
-    public TrabajoDto findById(@PathVariable Long id) {
+    public List<TrabajoDto> findById(@PathVariable Long id) {
         Optional<Categoria> categoriaOpt = categoriaRepository.findById(id);
+
         if (categoriaOpt.isPresent()) {
             Set<Trabajo> trabajos1 = categoriaOpt.get().getTrabajos();
-
-            List<Trabajo> trabajos = new ArrayList<>(trabajos1);
-
-            // ------
-            List<Review> reviews = reviewRepository.findAll();
-            List<TrabajoDto> trabDto = new ArrayList<>();
-            TrabajoDto trabajosDto = new TrabajoDto();
-            for (int i = 0; i < trabajos.size(); i++) {
-                trabajosDto = new TrabajoDto(trabajos.get(i).getId(), trabajos.get(i).getNombre(), trabajos.get(i).getImagen(), trabajos.get(i).getDescripcion(), trabajos.get(i).getPrecio(), trabajos.get(i).getCategorias(), trabajos.get(i).getVendedores(), trabajos.get(i).getFecha_Publicacion(), trabajos.get(i).getPaises(), trabajos.get(i).getIdiomas());
-
-                if (id.equals(trabajos.get(i).getCategorias()))
-
-//                int sumaReviews = 0;
-//                int cantReviews = 0;
-//                double promedio = 0;
-//
-//                for (int j = 0; j < reviews.size(); j++) {
-//                    if ((reviews.get(j).getTrabajos()) == (trabajos.get(i))) {
-//                        cantReviews++;
-//                        sumaReviews += reviews.get(j).getPuntuacion();
-//                    }
-//                }
-//
-//                if (cantReviews > 0) {
-//                    trabajosDto.setReviews(cantReviews);
-//                    promedio = sumaReviews / cantReviews;
-//                    trabajosDto.setPromedio(promedio);
-//                }
-
-                    trabDto.add(trabajosDto);
+            for(Trabajo trabajo : trabajos1) {
+                log.info(String.valueOf(trabajo));
             }
+            List<TrabajoDto> trabDtos = new ArrayList<>();
 
-            return trabajosDto;
+            for(Trabajo trabajo : trabajos1) {
+                TrabajoDto trabajoDto = new TrabajoDto(trabajo.getId(), trabajo.getNombre(), trabajo.getImagen(),
+                        trabajo.getDescripcion(), trabajo.getPrecio(), trabajo.getCategorias(), trabajo.getVendedores(),
+                        trabajo.getFecha_Publicacion(), trabajo.getPaises(), trabajo.getIdiomas());
+                trabDtos.add(trabajoDto);
+                }
 
-        }
+                return trabDtos;
+            }
 
         return null;
     }

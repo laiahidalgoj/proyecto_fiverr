@@ -36,7 +36,7 @@ public class VendedorController {
     }
 
     /**
-     * Buscar vendedor por  id
+     * Buscar vendedor por id
      * Request
      * Response
      */

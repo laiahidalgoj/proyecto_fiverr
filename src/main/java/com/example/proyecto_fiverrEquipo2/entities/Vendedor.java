@@ -44,7 +44,7 @@ public class Vendedor {
 
     public Vendedor(){}
 
-    public Vendedor(Long id, String nombre, String descripcion, Empresa empresa, Pais paises, String imagen, String email, Set<Trabajo> trabajo) {
+    public Vendedor(Long id, String nombre, String descripcion, Empresa empresa, Pais paises, String imagen, String email) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -52,7 +52,6 @@ public class Vendedor {
         this.paises = paises;
         this.imagen = imagen;
         this.email = email;
-        this.trabajo = trabajo;
     }
 
     public Vendedor(Long id, String nombre, String descripcion, Nivel nivel, String email, Empresa empresa, Pais paises){

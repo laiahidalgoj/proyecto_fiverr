@@ -79,12 +79,12 @@ public class Trabajo {
         this.paises = paises;
     }
 
-    public Trabajo(Long id, String nombre, String descripcion, Set<Vendedor> vendedores, Set<Categoria> categorias, Double precio, LocalDate fecha_Publicacion, Idioma idiomas, Pais paises) {
+    public Trabajo(Long id, String nombre, String descripcion, Double precio, LocalDate fecha_Publicacion, Idioma idiomas, Pais paises) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.vendedores = vendedores;
-        this.categorias = categorias;
+//        this.vendedores = vendedores;
+//        this.categorias = categorias;
         this.precio = precio;
         this.fecha_Publicacion = fecha_Publicacion;
         this.idiomas = idiomas;

@@ -25,11 +25,10 @@ public class Categoria {
 
     public Categoria(){}
 
-    public Categoria(Long id, String nombre, String descripcion, Set<Trabajo> trabajos) {
+    public Categoria(Long id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.trabajos = trabajos;
     }
 
     public Categoria(Long id, String nombre) {
