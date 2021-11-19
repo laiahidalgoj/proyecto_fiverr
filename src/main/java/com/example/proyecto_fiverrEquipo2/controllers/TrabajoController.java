@@ -39,7 +39,6 @@ public class TrabajoController {
      * Buscar todos los trabajos en BBDD
      */
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajos")
     public List<Trabajo> findAll() {
         return trabajoRepository.findAll();
@@ -91,7 +90,6 @@ public class TrabajoController {
      */
 
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajos/{id}")
     public ResponseEntity<Trabajo> findByIdJobs(@PathVariable Long id) {
         Optional<Trabajo> trabajosOpt = trabajoRepository.findById(id);
@@ -103,7 +101,6 @@ public class TrabajoController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajo/{id}")
     public ResponseEntity<Trabajo> findById(@PathVariable Long id) {
         Optional<Trabajo> trabajosOpt = trabajoRepository.findById(id);

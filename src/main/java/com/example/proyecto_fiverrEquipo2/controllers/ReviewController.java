@@ -32,7 +32,6 @@ public class ReviewController {
      * Buscar todas las reviews en BBDD.
      */
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/reviews")
     public List<Review> findAll() {
         return reviewRepository.findAll();
@@ -44,7 +43,6 @@ public class ReviewController {
      * Response
      */
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/reviews/{id}")
     public ResponseEntity<Review> findById(@PathVariable Long id) {
         Optional<Review> reseñaOpt = reviewRepository.findById(id);

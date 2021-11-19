@@ -57,12 +57,15 @@ public class ProyectoFiverrEquipo2Application {
 		System.out.println("Número de trabajos en base de datos " +  trabajoRepository.findAll().size());
 
 		// CREAMOS VENDEDOR
-		Vendedor vendedor1 = new Vendedor(null, "Laia", "Diseño la lógica de tu web", Nivel.Nivel1, "laia@laia.es", Empresa.Autonomo, Pais.España);
-		Vendedor vendedor2 = new Vendedor(null, "Rafa", "Diseño tu web responsive ", Nivel.Nivel1, "rafa@rafa.es", Empresa.Autonomo, Pais.EEUU);
-		Vendedor vendedor3 = new Vendedor(null, "Luis", "Diseño tu web creativo y único", Nivel.Nivel2, "luis@luis.es", Empresa.Autonomo, Pais.Italia);
-		Vendedor vendedor4 = new Vendedor(null, "Toni", "Diseño tu sitio web con wordpress", Nivel.Nivel2, "toni@toni.es", Empresa.Autonomo, Pais.España);
-		Vendedor vendedor5 = new Vendedor(null, "Marcos", "Diseñamos tu web desde 0", Nivel.Nivel1, "marcos@marcos.es", Empresa.Privada, Pais.Francia);
-		Vendedor vendedor6 = new Vendedor(null, "Marcos", "Diseñamos tu web desde 0", Nivel.Nivel1, "marcos@marcos.es", Empresa.Privada, Pais.Francia);
+		Vendedor vendedor1 = new Vendedor(null, "laia_hidalgo", "Diseño wirefreames, UX/UI y prototipos", Nivel.Nivel1, "laia@laia.es", Empresa.Autonomo, Pais.España);
+		Vendedor vendedor2 = new Vendedor(null, "maria_perez", "Proporciono consultoría, branding y animación 3D ", Nivel.Nivel1, "maria@maria.es", Empresa.Autonomo, Pais.EEUU);
+		Vendedor vendedor3 = new Vendedor(null, "luis_callado", "Diseño web creativo y único", Nivel.Nivel2, "luis@luis.es", Empresa.Autonomo, Pais.Italia);
+		Vendedor vendedor4 = new Vendedor(null, "toni_rubio", "Diseño web optimizado para SEO 100%", Nivel.Nivel2, "toni@toni.es", Empresa.Autonomo, Pais.España);
+		Vendedor vendedor5 = new Vendedor(null, "marcos_ruiz", "Diseñamos tu web profesional responsive", Nivel.Nivel1, "marcos@marcos.es", Empresa.Privada, Pais.Francia);
+		Vendedor vendedor6 = new Vendedor(null, "lucia_ortiz", "Diseñamos tu ecommerce a tu medida", Nivel.Nivel1, "lucia@lucia.es", Empresa.Privada, Pais.Francia);
+
+		vendedor1.setImagen("https://image.freepik.com/foto-gratis/mujer-positiva-sonriendo-modelo-divertido-que-presenta-cerca-pared-rosada-estudio_158538-3433.jpg");
+		vendedor2.setImagen("https://image.freepik.com/foto-gratis/joven-mujer-hermosa-moda-mujer-ropa-casual-verano-guinando-ojo-modelo-divertido-aislado-pared-azul_158538-7772.jpg");
 
 		// GUARDAMOS VENDEDORES EN EL REPOSITORIO
 		vendedorRepository.saveAll(Arrays.asList(vendedor1, vendedor2, vendedor3, vendedor4, vendedor5, vendedor6));
@@ -74,7 +77,7 @@ public class ProyectoFiverrEquipo2Application {
 		Categoria categoria2 = new Categoria(null, "Diseño web");
 		Categoria categoria3= new Categoria(null, "Diseño Responsive");
 		Categoria categoria4 = new Categoria(null, "Diseño creativo");
-		Categoria categoria5 = new Categoria(null, "Diseño 360");
+		Categoria categoria5 = new Categoria(null, "Diseño UX/UI");
 
 		List<Categoria> categorias = new ArrayList<Categoria>(Arrays.asList(categoria1, categoria2, categoria3, categoria4, categoria5));
 //		categorias.forEach(System.out::println);

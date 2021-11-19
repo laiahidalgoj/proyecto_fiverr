@@ -35,7 +35,6 @@ public class CategoriaController {
      * Buscar todas las categorías en BBDD
      */
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/categorias")
     public List<Categoria> findAll() {
         return categoriaRepository.findAll();
@@ -49,7 +48,6 @@ public class CategoriaController {
      * @return
      */
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/categorias/{id}")
     public List<TrabajoDto> findById(@PathVariable Long id) {
         Optional<Categoria> categoriaOpt = categoriaRepository.findById(id);

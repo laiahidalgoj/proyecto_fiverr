@@ -31,7 +31,6 @@ public class VendedorController {
      * Buscar todos los vendedores en BBDD
      */
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/vendedor")
     public List<Vendedor> findAll() {
         return vendedorRepository.findAll();
@@ -43,7 +42,6 @@ public class VendedorController {
      * Response
      */
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/vendedor/{id}")
     public ResponseEntity<Vendedor> findById(@PathVariable Long id) {
         Optional<Vendedor> vendedorOpt = vendedorRepository.findById(id);
