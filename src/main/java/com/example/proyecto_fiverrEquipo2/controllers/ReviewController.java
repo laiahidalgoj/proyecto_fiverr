@@ -90,5 +90,33 @@ public class ReviewController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * Eliminar una review de la bbdd.
+     *
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @DeleteMapping("/api/reviews/{id}")
+    public ResponseEntity<Review> delete(@PathVariable Long id) {
+
+        if (!reviewRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        reviewRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Eliminar todas las reviews de la base de datos
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @DeleteMapping("/api/reviews")
+    public ResponseEntity<Review> deleteAll() {
+        reviewRepository.deleteAll();
+        return ResponseEntity.noContent().build();
+    }
 
 }
