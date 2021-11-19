@@ -1,5 +1,6 @@
 package com.example.proyecto_fiverrEquipo2.controllers;
 
+import com.example.proyecto_fiverrEquipo2.entities.Trabajo;
 import com.example.proyecto_fiverrEquipo2.entities.Vendedor;
 import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class VendedorController {
@@ -91,4 +93,60 @@ public class VendedorController {
         Vendedor result = vendedorRepository.save(vendedor);
         return ResponseEntity.ok(result);
     }
+
+    // TODO
+
+    /**
+     * Eliminar un vendedor de la bbdd.
+     *
+     * @param id
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @DeleteMapping("/api/vendedor/{id}")
+    public ResponseEntity<Vendedor> delete(@PathVariable Long id) {
+
+        if (!vendedorRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Optional<Vendedor> vendedorOpt = vendedorRepository.findById(id);
+        if (vendedorOpt.isPresent()) {
+            Vendedor vendedor = vendedorOpt.get();
+            Set<Trabajo> trabajos =vendedor.getTrabajo();
+            for (Trabajo trabajo : trabajos) {
+                trabajo.removeVendedor(vendedor, false);
+                trabajoRepository.save(trabajo);
+            }
+        }
+
+        vendedorRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Eliminar todos los vendedores de la base de datos
+     * @return
+     */
+    @CrossOrigin
+//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @DeleteMapping("/api/vendedor")
+    public ResponseEntity<Vendedor> deleteAll() {
+        List<Vendedor> vendedores = vendedorRepository.findAll();
+
+        for (Vendedor vendedor: vendedores) {
+            Set<Trabajo> trabajos = vendedor.getTrabajo();
+            for (Trabajo trabajo: trabajos) {
+                trabajo.removeVendedor(vendedor, false);
+                trabajoRepository.save(trabajo);
+            }
+        }
+
+        vendedorRepository.deleteAll();
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
