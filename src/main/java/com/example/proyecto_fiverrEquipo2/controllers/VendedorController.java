@@ -7,6 +7,7 @@ import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class VendedorController {
      * Buscar todos los vendedores en BBDD
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/vendedor")
     public List<Vendedor> findAll() {
         return vendedorRepository.findAll();
@@ -41,6 +43,7 @@ public class VendedorController {
      * Response
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/vendedor/{id}")
     public ResponseEntity<Vendedor> findById(@PathVariable Long id) {
         Optional<Vendedor> vendedorOpt = vendedorRepository.findById(id);
@@ -56,7 +59,7 @@ public class VendedorController {
      *
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/vendedor")
     public ResponseEntity<Vendedor> create(@RequestBody Vendedor vendedor) {
         if (vendedor.getId() != null) {
@@ -78,7 +81,7 @@ public class VendedorController {
      * Actualizar un vendedor en la bbdd.
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/vendedor")
     public ResponseEntity<Vendedor> update(@RequestBody Vendedor vendedor) {
         if (vendedor.getId() == null) {
@@ -103,7 +106,7 @@ public class VendedorController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/vendedor/{id}")
     public ResponseEntity<Vendedor> delete(@PathVariable Long id) {
 
@@ -131,7 +134,7 @@ public class VendedorController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/vendedor")
     public ResponseEntity<Vendedor> deleteAll() {
         List<Vendedor> vendedores = vendedorRepository.findAll();

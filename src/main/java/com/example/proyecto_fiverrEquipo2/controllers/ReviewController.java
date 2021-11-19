@@ -7,6 +7,7 @@ import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class ReviewController {
      * Buscar todas las reviews en BBDD.
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/reviews")
     public List<Review> findAll() {
         return reviewRepository.findAll();
@@ -42,6 +44,7 @@ public class ReviewController {
      * Response
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/reviews/{id}")
     public ResponseEntity<Review> findById(@PathVariable Long id) {
         Optional<Review> reseñaOpt = reviewRepository.findById(id);
@@ -57,7 +60,7 @@ public class ReviewController {
      *n
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/reviews")
     public ResponseEntity<Review> create(@RequestBody Review review) {
         if (review.getId() != null) {
@@ -74,7 +77,7 @@ public class ReviewController {
      *
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/reviews")
     public ResponseEntity<Review> update(@RequestBody Review review) {
         if (review.getId() == null) {
@@ -95,7 +98,7 @@ public class ReviewController {
      *
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/reviews/{id}")
     public ResponseEntity<Review> delete(@PathVariable Long id) {
 
@@ -112,7 +115,7 @@ public class ReviewController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/reviews")
     public ResponseEntity<Review> deleteAll() {
         reviewRepository.deleteAll();

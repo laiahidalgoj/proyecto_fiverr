@@ -1,22 +1,16 @@
 package com.example.proyecto_fiverrEquipo2;
 
-import com.example.proyecto_fiverrEquipo2.entities.Review;
-import com.example.proyecto_fiverrEquipo2.entities.Trabajo;
-import com.example.proyecto_fiverrEquipo2.entities.Categoria;
-import com.example.proyecto_fiverrEquipo2.entities.Vendedor;
-import com.example.proyecto_fiverrEquipo2.repository.ReviewRepository;
-import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
-import com.example.proyecto_fiverrEquipo2.repository.CategoriaRepository;
-import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
+import com.example.proyecto_fiverrEquipo2.entities.*;
+import com.example.proyecto_fiverrEquipo2.repository.*;
+import com.example.proyecto_fiverrEquipo2.service.UserServiceImpl;
+import org.apache.catalina.Store;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 public class ProyectoFiverrEquipo2Application {
@@ -29,6 +23,8 @@ public class ProyectoFiverrEquipo2Application {
 		TrabajoRepository trabajoRepository = context.getBean(TrabajoRepository.class);
 		CategoriaRepository categoriaRepository = context.getBean(CategoriaRepository.class);
 		ReviewRepository reviewRepository = context.getBean(ReviewRepository.class);
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		RoleRepository roleRepository = context.getBean(RoleRepository.class);
 
 		// CREAMOS FECHAS DE PUBLICACIÓN
 		LocalDate fecha_Publicacion1 = LocalDate.of(2021, Calendar.SEPTEMBER, 19);
@@ -135,7 +131,20 @@ public class ProyectoFiverrEquipo2Application {
 		// GUARDAMOS REVIEWS
 		reviewRepository.saveAll(Arrays.asList(review1, review2, review3, review4, review5, review6, review7, review8, review9, review10));
 
+		//Inicializar usuarios y roles
 
+		BCryptPasswordEncoder bcryptEncoder = null;
+		Role role1 = new Role(1,"ADMIN", "Rol Admin");
+		Role role2 = new Role(2,"USER", "Rol User");
+		roleRepository.save(role1);
+		roleRepository.save(role2);
+		User user = new User(1,"admin","$2a$10$DTAejq8zVwf.dMadV1SAvuNXAbXjroY.G7dWpS1tzoGolwn7nexTm","","","","");
+		Set<Role> useradmin =new HashSet<>();
+		useradmin.add(role1);
+		useradmin.add(role2);
+		user.setRoles(useradmin);
+		UserServiceImpl encriptarUser = new UserServiceImpl();
+		userRepository.save(user);
 
 	}
 }

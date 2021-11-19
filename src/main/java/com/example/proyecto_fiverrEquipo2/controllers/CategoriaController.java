@@ -10,6 +10,7 @@ import com.example.proyecto_fiverrEquipo2.repository.TrabajoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -34,6 +35,7 @@ public class CategoriaController {
      * Buscar todas las categorías en BBDD
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/categorias")
     public List<Categoria> findAll() {
         return categoriaRepository.findAll();
@@ -47,6 +49,7 @@ public class CategoriaController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/categorias/{id}")
     public List<TrabajoDto> findById(@PathVariable Long id) {
         Optional<Categoria> categoriaOpt = categoriaRepository.findById(id);
@@ -79,7 +82,7 @@ public class CategoriaController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/categorias")
     public ResponseEntity<Categoria> create(@RequestBody Categoria categoria) {
         if (categoria.getId() != null) {
@@ -102,7 +105,7 @@ public class CategoriaController {
      * Actualizar una categoría en la bbdd.
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/categorias")
     public ResponseEntity<Categoria> update(@RequestBody Categoria categoria) {
         if (categoria.getId() == null) {
@@ -122,7 +125,7 @@ public class CategoriaController {
      * Eliminar una categoría de la BBDD.
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/categorias/{id}")
     public ResponseEntity<Categoria> delete(@PathVariable Long id) {
 
@@ -152,7 +155,7 @@ public class CategoriaController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/api/categorias")
     public ResponseEntity<Categoria> deleteAll() {
         List<Categoria> categorias = categoriaRepository.findAll();

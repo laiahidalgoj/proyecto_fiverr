@@ -12,6 +12,7 @@ import com.example.proyecto_fiverrEquipo2.repository.VendedorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -38,6 +39,7 @@ public class TrabajoController {
      * Buscar todos los trabajos en BBDD
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajos")
     public List<Trabajo> findAll() {
         return trabajoRepository.findAll();
@@ -89,7 +91,7 @@ public class TrabajoController {
      */
 
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajos/{id}")
     public ResponseEntity<Trabajo> findByIdJobs(@PathVariable Long id) {
         Optional<Trabajo> trabajosOpt = trabajoRepository.findById(id);
@@ -101,6 +103,7 @@ public class TrabajoController {
     }
 
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajo/{id}")
     public ResponseEntity<Trabajo> findById(@PathVariable Long id) {
         Optional<Trabajo> trabajosOpt = trabajoRepository.findById(id);
@@ -118,7 +121,7 @@ public class TrabajoController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/trabajo")
     public ResponseEntity<Trabajo> create(@RequestBody Trabajo trabajo) {
         if(trabajo.getId() != null) {
@@ -176,7 +179,7 @@ public class TrabajoController {
      *
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/trabajo")
     public ResponseEntity<Trabajo> update(@RequestBody Trabajo trabajo) {
         if (trabajo.getId() == null) {
@@ -266,7 +269,7 @@ public class TrabajoController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/trabajo/{id}")
     public ResponseEntity<Trabajo> delete(@PathVariable Long id) {
 
@@ -292,7 +295,7 @@ public class TrabajoController {
      * @return
      */
     @CrossOrigin
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/trabajos")
     public ResponseEntity<Trabajo> deleteAll() {
 
