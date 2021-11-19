@@ -34,12 +34,12 @@ public class ProyectoFiverrEquipo2Application {
 		LocalDate fecha_Publicacion5 = LocalDate.of(2021, Calendar.JULY, 13);
 
 		// CREAMOS TRABAJOS
-		Trabajo trabajo1 = new Trabajo(null, "Empresa1", "Diseño UX/UI", 800.50, Idioma.Español, Pais.España);
-		Trabajo trabajo2 = new Trabajo(null, "Empresa2", "Branding & Animación 3D", 900.30, Idioma.Español, Pais.EEUU);
-		Trabajo trabajo3 = new Trabajo(null, "Empresa3", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
-		Trabajo trabajo4 = new Trabajo(null, "Empresa4", "Diseños SEO optimizado", 1500.25, Idioma.Español, Pais.España);
-		Trabajo trabajo5 = new Trabajo(null, "Empresa5", "Diseño Responsive", 750.50, Idioma.Frances, Pais.Francia);
-		Trabajo trabajo6 = new Trabajo(null, "Empresa6", "Desarrollo web", 1220.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo1 = new Trabajo(null, "laia_hidalgo", "Diseño UX/UI", 800.50, Idioma.Español, Pais.España);
+		Trabajo trabajo2 = new Trabajo(null, "maria_perez", "Branding & Animación 3D", 900.30, Idioma.Español, Pais.EEUU);
+		Trabajo trabajo3 = new Trabajo(null, "luis_callado", "Diseños creativos", 1200.80, Idioma.Español, Pais.Italia);
+		Trabajo trabajo4 = new Trabajo(null, "toni_rubio", "Diseños SEO optimizado", 1500.25, Idioma.Español, Pais.España);
+		Trabajo trabajo5 = new Trabajo(null, "marcios_ruiz", "Diseño Responsive", 750.50, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo6 = new Trabajo(null, "lucia_ortiz", "Desarrollo web", 1220.50, Idioma.Frances, Pais.Francia);
 
 		trabajo1.setImagen("https://image.freepik.com/vector-gratis/fondo-degradado-ui-ux_23-2149065782.jpg");
 		trabajo2.setImagen("https://image.freepik.com/vector-gratis/tema-colorido-conjunto-emoji_79603-1264.jpg");
@@ -143,7 +143,6 @@ public class ProyectoFiverrEquipo2Application {
 		reviewRepository.saveAll(Arrays.asList(review1, review2, review3, review4, review5, review6, review7, review8, review9, review10));
 
 		//Inicializar usuarios y roles
-
 		BCryptPasswordEncoder bcryptEncoder = null;
 		Role role1 = new Role(1,"ADMIN", "Rol Admin");
 		Role role2 = new Role(2,"USER", "Rol User");
