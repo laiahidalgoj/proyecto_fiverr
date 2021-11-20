@@ -27,32 +27,50 @@ public class ProyectoFiverrEquipo2Application {
 		RoleRepository roleRepository = context.getBean(RoleRepository.class);
 
 		// CREAMOS TRABAJOS
-		Trabajo trabajo1 = new Trabajo(null, "laia_hidalgo", "Diseño UX/UI", 800.50, LocalDate.of(2021, Calendar.OCTOBER, 20), Idioma.Español, Pais.España);
-		Trabajo trabajo2 = new Trabajo(null, "maria_perez", "Branding & Animación 3D", 900.30, LocalDate.of(2021, Calendar.OCTOBER, 20), Idioma.Español, Pais.EEUU);
-		Trabajo trabajo3 = new Trabajo(null, "luis_callado", "Diseños creativos", 1200.80, LocalDate.of(2021, Calendar.NOVEMBER, 4), Idioma.Español, Pais.Italia);
-		Trabajo trabajo4 = new Trabajo(null, "marcos_ruiz", "Diseño Responsive", 750.50, LocalDate.of(2021, Calendar.JULY, 13), Idioma.Frances, Pais.Francia);
-		Trabajo trabajo5 = new Trabajo(null, "marcos_ruiz", "Diseño Responsive", 750.50, LocalDate.of(2021, Calendar.JULY, 13), Idioma.Frances, Pais.Francia);
-		Trabajo trabajo6 = new Trabajo(null, "lucia_ortiz", "Desarrollo web", 903.54, LocalDate.of(2021, Calendar.OCTOBER, 20),Idioma.Ingles, Pais.ReinoUnido);
-		Trabajo trabajo7 = new Trabajo(null, "laia_hidalgo", "Diseño UX/UI", 1220.50,LocalDate.of(2021, Calendar.OCTOBER, 20), Idioma.Frances, Pais.Francia);
-		Trabajo trabajo8 = new Trabajo(null, "maria_perez", "Desarrollo web", 1300.50, LocalDate.of(2021, Calendar.JULY, 13), Idioma.Ingles, Pais.EEUU);
-		Trabajo trabajo9 = new Trabajo(null, "luis_callado", "Branding & Animación 3D", 1311.70, LocalDate.of(2021, Calendar.NOVEMBER, 4), Idioma.Español, Pais.España);
-		Trabajo trabajo10 = new Trabajo(null, "toni_rubio", "Desarrollo web", 1220.50, LocalDate.of(2021, Calendar.OCTOBER, 20),Idioma.Frances, Pais.Francia);
-		Trabajo trabajo11 = new Trabajo(null, "marcos_ruiz", "Diseños SEO optimizado", 1220.50, LocalDate.of(2021, Calendar.JULY, 13), Idioma.Frances, Pais.Francia);
-		Trabajo trabajo12 = new Trabajo(null, "lucia_ortiz", "Desarrollo web", 900.50, LocalDate.of(2021, Calendar.OCTOBER, 20),Idioma.Frances, Pais.Francia);
-		Trabajo trabajo13 = new Trabajo(null, "laia_hidalgo", "Diseño UX/UI", 1220.50, LocalDate.of(2021, Calendar.NOVEMBER, 4),Idioma.Ingles, Pais.EEUU);
-		Trabajo trabajo14 = new Trabajo(null, "maria_perez", "Desarrollo web", 854.50, LocalDate.of(2021, Calendar.JULY, 13),Idioma.Ingles, Pais.EEUU);
-		Trabajo trabajo15 = new Trabajo(null, "luis_callado", "Diseño Responsive", 1220.50, LocalDate.of(2021, Calendar.OCTOBER, 20),Idioma.Frances, Pais.Francia);
-		Trabajo trabajo16 = new Trabajo(null, "toni_rubio", "Desarrollo web", 1220.50, LocalDate.of(2021, Calendar.SEPTEMBER, 19), Idioma.Español, Pais.España);
-		Trabajo trabajo17 = new Trabajo(null, "toni_rubio", "Branding & Animación 3D", 1220.50, LocalDate.of(2021, Calendar.SEPTEMBER, 19), Idioma.Español, Pais.España);
-		Trabajo trabajo18 = new Trabajo(null, "marta_colado", "Diseños SEO optimizado", 1220.50, LocalDate.of(2021, Calendar.JULY, 13), Idioma.Frances, Pais.Francia);
+		Trabajo trabajo1 = new Trabajo(null, "laia_hidalgo", "Diseñaré tu web UX/UI, tu tienda online, sitio web ecommerce", 800.50, LocalDate.of(2021, Calendar.OCTOBER, 20), Nivel.Nivel1, Idioma.Español, Pais.España);
+		Trabajo trabajo2 = new Trabajo(null, "maria_perez", "Diseñaré con técnicas modernas de ilustración y modelado en 3D para crear objetos en tres dimensiones y crear animaciones", 900.30, LocalDate.of(2021, Calendar.OCTOBER, 20), Nivel.Nivel1, Idioma.Español, Pais.EEUU);
+		Trabajo trabajo3 = new Trabajo(null, "luis_callado", "Diseñaré un sitio web creativo en 24 horas", 1200.80, LocalDate.of(2021, Calendar.NOVEMBER, 4), Nivel.Nivel2, Idioma.Español, Pais.Italia);
+		Trabajo trabajo4 = new Trabajo(null, "marcos_ruiz", "Diseñaré un sitio web responsive para todos tus dispositivos", 750.50, LocalDate.of(2021, Calendar.JULY, 13),  Nivel.MejorCalificado, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo5 = new Trabajo(null, "marcos_ruiz", "Diseñaré un sitio web responsive para todos tus dispositivos", 750.50, LocalDate.of(2021, Calendar.JULY, 13), Nivel.MejorCalificado,  Idioma.Frances, Pais.Francia);
+		Trabajo trabajo6 = new Trabajo(null, "lucia_ortiz", "Desarrollaré un sitio web profesional y una aplicación web para su negocio", 903.54, LocalDate.of(2021, Calendar.OCTOBER, 20), Nivel.Nivel1, Idioma.Ingles, Pais.UK);
+		Trabajo trabajo7 = new Trabajo(null, "laia_hidalgo", "Diseñaré tu web UX/UI, tu tienda online, sitio web ecommerce", 1220.50,LocalDate.of(2021, Calendar.OCTOBER, 20), Nivel.Nivel1, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo8 = new Trabajo(null, "maria_perez", "Desarrollaré un sitio web profesional y una aplicación web para su negocio", 1300.50, LocalDate.of(2021, Calendar.JULY, 13), Nivel.Nivel1, Idioma.Ingles, Pais.EEUU);
+		Trabajo trabajo9 = new Trabajo(null, "luis_callado", "Diseñaré con técnicas modernas de ilustración y modelado en 3D para crear objetos en tres dimensiones y crear animaciones", 1311.70, LocalDate.of(2021, Calendar.NOVEMBER, 4), Nivel.Nivel2,  Idioma.Español, Pais.España);
+		Trabajo trabajo10 = new Trabajo(null, "toni_rubio", "Desarrollaré un sitio web profesional y una aplicación web para su negocio", 1220.50, LocalDate.of(2021, Calendar.OCTOBER, 20), Nivel.Nivel2, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo11 = new Trabajo(null, "marcos_ruiz", "Diseñaré tu web para el posicionamiento y su optimización en motores de búsqueda", 1220.50, LocalDate.of(2021, Calendar.JULY, 13), Nivel.MejorCalificado, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo12 = new Trabajo(null, "lucia_ortiz", "Desarrollaré un sitio web profesional y una aplicación web para su negocio", 900.50, LocalDate.of(2021, Calendar.OCTOBER, 20), Nivel.Nivel1, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo13 = new Trabajo(null, "laia_hidalgo", "Diseñaré tu web UX/UI, tu tienda online, sitio web ecommerce", 1220.50, LocalDate.of(2021, Calendar.NOVEMBER, 4), Nivel.Nivel1, Idioma.Ingles, Pais.EEUU);
+		Trabajo trabajo14 = new Trabajo(null, "maria_perez", "Desarrollaré un sitio web profesional y una aplicación web para su negocio", 854.50, LocalDate.of(2021, Calendar.JULY, 13), Nivel.Nivel1, Idioma.Ingles, Pais.UK);
+		Trabajo trabajo15 = new Trabajo(null, "luis_callado", "Diseñaré un sitio web responsive para todos tus dispositivos", 1220.50, LocalDate.of(2021, Calendar.OCTOBER, 20), Nivel.Nivel2, Idioma.Frances, Pais.Francia);
+		Trabajo trabajo16 = new Trabajo(null, "toni_rubio", "Desarrollaré un sitio web profesional y una aplicación web para su negocio", 1220.50, LocalDate.of(2021, Calendar.SEPTEMBER, 19), Nivel.Nivel2, Idioma.Español, Pais.España);
+		Trabajo trabajo17 = new Trabajo(null, "toni_rubio", "Diseñaré con técnicas modernas de ilustración y modelado en 3D para crear objetos en tres dimensiones y crear animaciones", 1220.50, LocalDate.of(2021, Calendar.SEPTEMBER, 19), Nivel.Nivel2, Idioma.Español, Pais.España);
+		Trabajo trabajo18 = new Trabajo(null, "marta_colado", "Diseñaré tu web para el posicionamiento y su optimización en motores de búsqueda", 1220.50, LocalDate.of(2021, Calendar.JULY, 13), Nivel.MejorCalificado,  Idioma.Frances, Pais.Francia);
 
 
+		// imagen ux/ui
 		trabajo1.setImagen("https://image.freepik.com/vector-gratis/fondo-degradado-ui-ux_23-2149065782.jpg");
+		trabajo7.setImagen("https://image.freepik.com/vector-gratis/fondo-degradado-ui-ux_23-2149065782.jpg");
+		trabajo13.setImagen("https://image.freepik.com/vector-gratis/fondo-degradado-ui-ux_23-2149065782.jpg");
+		// diseño 3d
 		trabajo2.setImagen("https://image.freepik.com/vector-gratis/tema-colorido-conjunto-emoji_79603-1264.jpg");
+		trabajo9.setImagen("https://image.freepik.com/vector-gratis/tema-colorido-conjunto-emoji_79603-1264.jpg");
+		trabajo17.setImagen("https://image.freepik.com/vector-gratis/tema-colorido-conjunto-emoji_79603-1264.jpg");
+		// diseño creativo
 		trabajo3.setImagen("https://image.freepik.com/vector-gratis/fondo-abstracto-colorido-diseno-plano_23-2149120550.jpg");
-		trabajo4.setImagen("https://image.freepik.com/vector-gratis/optimizacion-seo_24908-55896.jpg");
+		//diseño responsive
 		trabajo5.setImagen("https://image.freepik.com/psd-gratis/mockup-dispositivos-electronicos_23-2147864572.jpg");
+		trabajo15.setImagen("https://image.freepik.com/psd-gratis/mockup-dispositivos-electronicos_23-2147864572.jpg");
+		// desarrollo web
 		trabajo6.setImagen("https://image.freepik.com/vector-gratis/desarrolladores-web-dibujados-mano_23-2148815976.jpg");
+		trabajo8.setImagen("https://image.freepik.com/vector-gratis/desarrolladores-web-dibujados-mano_23-2148815976.jpg");
+		trabajo10.setImagen("https://image.freepik.com/vector-gratis/desarrolladores-web-dibujados-mano_23-2148815976.jpg");
+		trabajo12.setImagen("https://image.freepik.com/vector-gratis/desarrolladores-web-dibujados-mano_23-2148815976.jpg");
+		trabajo14.setImagen("https://image.freepik.com/vector-gratis/desarrolladores-web-dibujados-mano_23-2148815976.jpg");
+		trabajo16.setImagen("https://image.freepik.com/vector-gratis/desarrolladores-web-dibujados-mano_23-2148815976.jpg");
+		//diseño SEO
+		trabajo4.setImagen("https://image.freepik.com/vector-gratis/optimizacion-seo_24908-55896.jpg");
+		trabajo11.setImagen("https://image.freepik.com/vector-gratis/optimizacion-seo_24908-55896.jpg");
+		trabajo18.setImagen("https://image.freepik.com/vector-gratis/optimizacion-seo_24908-55896.jpg");
 
 		// GUARDAMOS TRABAJOS EN EL REPOSITORIO
 		trabajoRepository.saveAll(Arrays.asList(trabajo1, trabajo2, trabajo3, trabajo4, trabajo5, trabajo6, trabajo7,
@@ -65,7 +83,7 @@ public class ProyectoFiverrEquipo2Application {
 		Vendedor vendedor2 = new Vendedor(null, "maria_perez", "Proporciono consultoría, branding y animación 3D ", Nivel.Nivel1, "maria@maria.es", Empresa.Autonomo, Pais.EEUU);
 		Vendedor vendedor3 = new Vendedor(null, "luis_callado", "Diseño web creativo y único", Nivel.Nivel2, "luis@luis.es", Empresa.Autonomo, Pais.Italia);
 		Vendedor vendedor4 = new Vendedor(null, "toni_rubio", "Diseño web optimizado para SEO 100%", Nivel.Nivel2, "toni@toni.es", Empresa.Autonomo, Pais.España);
-		Vendedor vendedor5 = new Vendedor(null, "marcos_ruiz", "Diseñamos tu web profesional responsive", Nivel.Nivel1, "marcos@marcos.es", Empresa.Privada, Pais.Francia);
+		Vendedor vendedor5 = new Vendedor(null, "marcos_ruiz", "Diseñamos tu web profesional responsive", Nivel.MejorCalificado, "marcos@marcos.es", Empresa.Privada, Pais.Francia);
 		Vendedor vendedor6 = new Vendedor(null, "lucia_ortiz", "Diseñamos tu ecommerce a tu medida", Nivel.Nivel1, "lucia@lucia.es", Empresa.Privada, Pais.Francia);
 		Vendedor vendedor7 = new Vendedor(null, "marta_colado", "Diseñamos tu ecommerce a tu medida", Nivel.MejorCalificado, "marta@marta.es", Empresa.Autonomo, Pais.España);
 
@@ -105,7 +123,7 @@ public class ProyectoFiverrEquipo2Application {
 		System.out.println("Número de categorías: " + categoriaRepository.findAll().size());
 
 		//AÑADIMOS CATEGORIAS A CADA TRABAJO
-		trabajo1.addCategoria(categoria5);
+		trabajo1.addCategoria(categoria1);
 		trabajo2.addCategoria(categoria9);
 		trabajo3.addCategoria(categoria4);
 		trabajo4.addCategoria(categoria3);

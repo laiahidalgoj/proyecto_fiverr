@@ -1,6 +1,7 @@
 package com.example.proyecto_fiverrEquipo2.entities;
 
 import com.example.proyecto_fiverrEquipo2.Idioma;
+import com.example.proyecto_fiverrEquipo2.Nivel;
 import com.example.proyecto_fiverrEquipo2.Pais;
 
 import javax.persistence.*;
@@ -46,6 +47,9 @@ public class Trabajo {
     @Enumerated
     private Pais paises;
 
+    @Enumerated
+    private Nivel niveles;
+
     private String nombre;
     private String descripcion;
     private String imagen;
@@ -78,7 +82,7 @@ public class Trabajo {
         this.paises = paises;
     }
 
-    public Trabajo(Long id, String nombre, String descripcion, Double precio, LocalDate fecha_Publicacion, Idioma idiomas, Pais paises) {
+    public Trabajo(Long id, String nombre, String descripcion, Double precio, LocalDate fecha_Publicacion, Nivel niveles, Idioma idiomas, Pais paises) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -86,6 +90,7 @@ public class Trabajo {
 //        this.categorias = categorias;
         this.precio = precio;
         this.fecha_Publicacion = fecha_Publicacion;
+        this.niveles = niveles;
         this.idiomas = idiomas;
         this.paises = paises;
     }
