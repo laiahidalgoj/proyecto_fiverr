@@ -133,7 +133,7 @@ public class ProyectoFiverrEquipo2Application {
 		Categoria categoria8 = new Categoria(null, "Logo Design");
 		Categoria categoria9 = new Categoria(null, "animación 3D");
 
-		List<Categoria> categorias = new ArrayList<Categoria>(Arrays.asList(categoria1, categoria2, categoria3,
+		List<Categoria> categorias = new ArrayList<>(Arrays.asList(categoria1, categoria2, categoria3,
 				categoria4, categoria5, categoria6, categoria7, categoria8, categoria9));
 //		categorias.forEach(System.out::println);
 
